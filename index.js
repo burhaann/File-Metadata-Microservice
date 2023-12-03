@@ -14,15 +14,11 @@ app.get("/", function (req, res) {
 
 const upload = multer();
 
-app.post(
-  "/api/fileanalyse",
-  upload.single("uploadedfile"),
-  function (req, res) {
-    const { originalname, mimetype, size } = req.file;
-    console.log(req.file);
-    res.json({ name: originalname, type: mimetype, size: size });
-  }
-);
+app.post("/api/fileanalyse", upload.single("ufile"), function (req, res) {
+  const { originalname, mimetype, size } = req.file;
+  console.log(req.file);
+  res.json({ name: originalname, type: mimetype, size: size });
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, function () {
